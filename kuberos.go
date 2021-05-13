@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"path/filepath"
 
-	"github.com/negz/kuberos/extractor"
+	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
 
 	oidc "github.com/coreos/go-oidc"
 	"github.com/gorilla/schema"
@@ -17,7 +17,7 @@ import (
 	"github.com/spf13/afero"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )

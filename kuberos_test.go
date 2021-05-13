@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/afero"
 	"golang.org/x/oauth2"
 
-	"github.com/negz/kuberos/extractor"
+	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
 
 	"k8s.io/client-go/tools/clientcmd/api"
 )
@@ -37,9 +37,12 @@ func TestAuthCodeURL(t *testing.T) {
 			c: &oauth2.Config{
 				ClientID:     "testClientID",
 				ClientSecret: "testClientSecret",
-				Endpoint:     oauth2.Endpoint{"https://auth.example.org", "https://token.example.org"},
-				Scopes:       DefaultScopes,
-				RedirectURL:  "https://example.org/redirect",
+				Endpoint: oauth2.Endpoint{
+					AuthURL:  "https://auth.example.org",
+					TokenURL: "https://token.example.org",
+				},
+				Scopes:      DefaultScopes,
+				RedirectURL: "https://example.org/redirect",
 			},
 			s:   func(_ *http.Request) string { return "state" },
 			url: "https://auth.example.org?access_type=offline&client_id=testClientID&prompt=consent&redirect_uri=http%3A%2F%2Fexample.com%2Fui&response_type=code&scope=openid&state=state",
@@ -49,9 +52,12 @@ func TestAuthCodeURL(t *testing.T) {
 			c: &oauth2.Config{
 				ClientID:     "testClientID",
 				ClientSecret: "testClientSecret",
-				Endpoint:     oauth2.Endpoint{"https://auth.example.org", "https://token.example.org"},
-				Scopes:       []string{oidc.ScopeOpenID, oidc.ScopeOfflineAccess},
-				RedirectURL:  "https://example.org/redirect",
+				Endpoint: oauth2.Endpoint{
+					AuthURL:  "https://auth.example.org",
+					TokenURL: "https://token.example.org",
+				},
+				Scopes:      []string{oidc.ScopeOpenID, oidc.ScopeOfflineAccess},
+				RedirectURL: "https://example.org/redirect",
 			},
 			s:   func(_ *http.Request) string { return "state" },
 			url: "https://auth.example.org?client_id=testClientID&prompt=consent&redirect_uri=http%3A%2F%2Fexample.com%2Fui&response_type=code&scope=openid+offline_access&state=state",

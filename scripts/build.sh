@@ -36,5 +36,5 @@ go build -o "${DIST}/kuberos" ./cmd/kuberos
 
 # Create the docker image
 VERSION=$(git rev-parse --short HEAD)
-docker build --tag "negz/kuberos:latest" .
-docker build --tag "negz/kuberos:${VERSION}" .
+docker build --tag "poornimak/kuberos:latest" .
+docker build --tag "poornimak/kuberos:${VERSION}" .

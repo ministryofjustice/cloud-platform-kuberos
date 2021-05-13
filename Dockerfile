@@ -1,10 +1,10 @@
-FROM node:9-alpine as node
+FROM node:16-alpine as node
 ADD frontend/ .
 RUN npm install && npm run build
 
-FROM golang:1.12-alpine3.9 as golang
+FROM golang:alpine3.13 as golang
 RUN apk --no-cache add git
-WORKDIR /go/src/github.com/negz/kuberos/
+WORKDIR /go/src/github.com/poornima-krishnasamy/cloud-platform-kuberos/
 ENV CGO_ENABLED=0
 
 ADD . .
@@ -18,7 +18,7 @@ RUN go get -u github.com/Masterminds/glide && \
 RUN cd statik && go generate && cd ..
 RUN go build -o /kuberos ./cmd/kuberos
 
-FROM alpine:3.9
+FROM alpine:3.13
 MAINTAINER Nic Cope <n+docker@rk0n.org>
 
 RUN apk --no-cache add ca-certificates curl

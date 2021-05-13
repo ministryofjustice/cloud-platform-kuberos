@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -44,19 +46,12 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
-  },
   performance: {
     hints: false
-  },
-  devtool: '#eval-source-map'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -64,14 +59,9 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new VueLoaderPlugin(),
   ])
 }
