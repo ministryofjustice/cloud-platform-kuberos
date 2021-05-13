@@ -11,9 +11,7 @@ ADD . .
 COPY --from=node dist/ dist/frontend
 COPY --from=node index.html dist/frontend/
 
-RUN go get -u github.com/Masterminds/glide && \
-  go get -u github.com/rakyll/statik && \
-  glide install
+RUN go get -u github.com/rakyll/statik 
 
 RUN cd statik && go generate && cd ..
 RUN go build -o /kuberos ./cmd/kuberos

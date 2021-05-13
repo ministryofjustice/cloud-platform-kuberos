@@ -21,15 +21,15 @@ popd
 cp frontend/index.html "${DIST}/frontend/"
 cp frontend/dist/* "${DIST}/frontend/"
 
-go get -u github.com/Masterminds/glide
-go get -u github.com/rakyll/statik
+# go get -u github.com/Masterminds/glide
+# go get -u github.com/rakyll/statik
 
-# Create the vendor directory based on glide.lock
-glide install
+# # Create the vendor directory based on glide.lock
+# glide install
 
-pushd statik
-go generate
-popd
+# pushd statik
+# go generate
+# popd
 
 # Build the binary
 go build -o "${DIST}/kuberos" ./cmd/kuberos

@@ -9,6 +9,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/go-test/deep v1.0.7
 	github.com/gorilla/schema v1.2.0
+	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/pquerna/cachecontrol v0.1.0 // indirect
 	github.com/rakyll/statik v0.1.7
