@@ -9,6 +9,7 @@ new Vue({
 
 import Vue from 'vue';
 import VueAxios from 'vue-axios';
+import axios from 'axios';
 import Meta from 'vue-meta';
 import VueHighlightJS from 'vue-highlightjs';
 import ElementUI from 'element-ui';

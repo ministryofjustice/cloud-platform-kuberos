@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.14.2",
+    "axios": "^0.21.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "element-ui": "^2.15.1",
