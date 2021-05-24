@@ -1,12 +1,3 @@
-
-/* import App from './App.vue';
-
-new Vue({
-  el: '#app',
-  render: h => h(App),
-});
-*/
-
 import Vue from 'vue';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
@@ -25,6 +16,7 @@ Vue.use(ElementUI)
 
 
 Vue.config.productionTip = false
+
 
 new Vue({
   el: '#app',

@@ -1,14 +1,22 @@
+// Webpack uses this to work with directories
 var path = require('path')
+
 var webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+// This is the main configuration object.
+// Here, you write different options and tell Webpack what to do
 module.exports = {
+  // Path to your entry point. From this file Webpack will begin its work
   entry: './src/main.js',
+  // Path and filename of your result bundle.
+  // Webpack will bundle all JavaScript into this file
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  // You say Webpack how exactly it should transform different types of files
   module: {
     rules: [{
         test: /\.vue$/,
@@ -34,7 +42,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'inline-source-map',
+  //Automatically load modules instead of having to import or require them everywhere.
   plugins: [
     new webpack.ProvidePlugin({
       '$': 'jquery'
@@ -52,7 +60,7 @@ module.exports = {
     hints: false
   }
 }
-
+// Additional plugins for production mode for minimize the code
 if (process.env.NODE_ENV === 'production') {
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -64,6 +72,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new VueLoaderPlugin(),
   ])
 }
