@@ -6,7 +6,7 @@ import (
 	"context"
 	"testing"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 )
 
 func TestOfflineAsScope(t *testing.T) {
