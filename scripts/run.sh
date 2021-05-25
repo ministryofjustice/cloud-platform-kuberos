@@ -27,7 +27,7 @@ docker run -d \
 	--name ${NAME} \
 	-p 10003:10003 \
 	-v $CFG:/cfg \
-	"poornimak/kuberos:${VERSION}" /kuberos \
+	"ministryofjustice/cloud-platform-kuberos:${VERSION}" /kuberos \
 	https://justice-cloud-platform.eu.auth0.com \
 	$OIDC_CLIENT_ID \
 	/cfg/secret \
