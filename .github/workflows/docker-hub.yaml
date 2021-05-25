@@ -11,7 +11,17 @@ jobs:
     -
         name: checkout
         uses: actions/checkout@v2
-        
+    -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            poornimak/kuberos
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=ref,event=branch
         #added step from https://github.com/docker/build-push-action/blob/master/UPGRADE.md 
     -   
         name: Set up Docker Buildx
@@ -30,4 +40,4 @@ jobs:
         with:
       
          repository: poornimak/kuberos
-         tags: type=ref,event=tag
+         tags: ${{ steps.meta.outputs.tags }}
