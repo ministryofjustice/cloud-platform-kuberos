@@ -1,4 +1,4 @@
-module github.com/poornima-krishnasamy/cloud-platform-kuberos
+module github.com/ministryofjustice/cloud-platform-kuberos
 
 go 1.16
 

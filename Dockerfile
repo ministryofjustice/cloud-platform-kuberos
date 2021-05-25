@@ -4,7 +4,7 @@ RUN npm install && npm run build
 
 FROM golang:alpine3.13 as golang
 RUN apk --no-cache add git
-WORKDIR /go/src/github.com/poornima-krishnasamy/cloud-platform-kuberos/
+WORKDIR /go/src/github.com/ministryofjustice/cloud-platform-kuberos/
 ENV CGO_ENABLED=0
 
 ADD . .

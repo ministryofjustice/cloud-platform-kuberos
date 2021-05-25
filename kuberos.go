@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"path/filepath"
 
-	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
+	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 
 	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/gorilla/schema"

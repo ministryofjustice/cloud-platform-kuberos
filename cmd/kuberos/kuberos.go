@@ -12,11 +12,11 @@ import (
 	"syscall"
 	"time"
 
-	kuberos "github.com/poornima-krishnasamy/cloud-platform-kuberos"
-	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
+	kuberos "github.com/ministryofjustice/cloud-platform-kuberos"
+	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 	"github.com/rakyll/statik/fs"
 
-	_ "github.com/poornima-krishnasamy/cloud-platform-kuberos/statik"
+	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
 
 	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"

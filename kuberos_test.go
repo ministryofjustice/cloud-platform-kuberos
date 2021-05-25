@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/afero"
 	"golang.org/x/oauth2"
 
-	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
+	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 
 	"k8s.io/client-go/tools/clientcmd/api"
 )
