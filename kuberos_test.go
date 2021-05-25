@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/go-test/deep"
 	"github.com/spf13/afero"
 	"golang.org/x/oauth2"

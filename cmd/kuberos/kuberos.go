@@ -18,7 +18,7 @@ import (
 
 	_ "github.com/poornima-krishnasamy/cloud-platform-kuberos/statik"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
