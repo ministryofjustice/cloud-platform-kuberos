@@ -11,7 +11,7 @@ import (
 
 	"github.com/poornima-krishnasamy/cloud-platform-kuberos/extractor"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/gorilla/schema"
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
