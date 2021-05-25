@@ -30,4 +30,4 @@ jobs:
         with:
       
          repository: poornimak/kuberos
-         tag_with_ref: true 
+         tags: type=ref,event=tag
