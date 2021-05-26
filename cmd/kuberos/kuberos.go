@@ -12,13 +12,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/negz/kuberos"
-	"github.com/negz/kuberos/extractor"
+	kuberos "github.com/ministryofjustice/cloud-platform-kuberos"
+	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 	"github.com/rakyll/statik/fs"
 
-	_ "github.com/negz/kuberos/statik"
+	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"

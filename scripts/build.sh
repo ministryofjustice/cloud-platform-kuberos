@@ -21,20 +21,10 @@ popd
 cp frontend/index.html "${DIST}/frontend/"
 cp frontend/dist/* "${DIST}/frontend/"
 
-go get -u github.com/Masterminds/glide
-go get -u github.com/rakyll/statik
-
-# Create the vendor directory based on glide.lock
-glide install
-
-pushd statik
-go generate
-popd
-
 # Build the binary
 go build -o "${DIST}/kuberos" ./cmd/kuberos
 
 # Create the docker image
 VERSION=$(git rev-parse --short HEAD)
-docker build --tag "negz/kuberos:latest" .
-docker build --tag "negz/kuberos:${VERSION}" .
+docker build --tag "ministryofjustice/cloud-platform-kuberos:latest" .
+docker build --tag "ministryofjustice/cloud-platform-kuberos:${VERSION}" .

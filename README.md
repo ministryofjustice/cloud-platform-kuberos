@@ -60,13 +60,13 @@ clusters:
     server: https://kuberos.example.org
 EOF
 
-docker run -d -p 10003:10003 -v /tmp/cfg:/cfg "negz/kuberos:latest" \
+docker run -d -p 10003:10003 -v /tmp/cfg:/cfg "ministryofjustice/cloud-platform-kuberos:latest" \
   /kuberos https://accounts.google.com $OIDC_CLIENT_ID /cfg/secret /cfg/template
 ```
 
 Kuberos supports the following arguments:
 ```bash
-$ docker run negz/kuberos:latest /kuberos --help
+$ docker run ministryofjustice/cloud-platform-kuberos:latest /kuberos --help
 usage: kuberos [<flags>] [<oidc-issuer-url>] [<client-id>] [<client-secret-file>] [<kubecfg-template>]
 
 Provides OIDC authentication configuration for kubectl.
@@ -153,7 +153,7 @@ spec:
         hostnames:
         - "dex.oidc.example.com"
       containers:
-      - image: negz/kuberos:latest
+      - image: ministryofjustice/cloud-platform-kuberos:latest
         name: kuberos
         command: ["/kuberos", "https://dex.oidc.example.com", "example-app", "/cfg/secret", "/cfg/template"]
         ports:

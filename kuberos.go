@@ -9,15 +9,15 @@ import (
 	"net/url"
 	"path/filepath"
 
-	"github.com/negz/kuberos/extractor"
+	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/gorilla/schema"
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 )
