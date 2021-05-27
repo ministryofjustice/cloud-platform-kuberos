@@ -2,8 +2,8 @@
 
 set -ex
 
-OIDC_CLIENT_ID=$1
-OIDC_CLIENT_SECRET=$2
+OIDC_CLIENT_ID=XXXXX
+OIDC_CLIENT_SECRET=XXXXX
 
 CFG=$(mktemp -d /tmp/kuberos.XXXX)
 echo $OIDC_CLIENT_SECRET >$CFG/secret
@@ -11,10 +11,10 @@ cat <<EOF >$CFG/template
 apiVersion: v1
 kind: Config
 clusters:
-- name: kuberos
+- name: <cp-XXXX>.cloud-platform.service.justice.gov.uk
   cluster:
-    certificate-authority-data: REDACTED
-    server: https://kuberos.example.org
+    certificate-authority-data: 
+    server: https://XXXX.gr7.eu-west-2.eks.amazonaws.com
 EOF
 
 VERSION=$(git rev-parse --short HEAD)
@@ -28,7 +28,7 @@ docker run -d \
 	-p 10003:10003 \
 	-v $CFG:/cfg \
 	"ministryofjustice/cloud-platform-kuberos:${VERSION}" /kuberos \
-	https://justice-cloud-platform.eu.auth0.com \
+	https://justice-cloud-platform.eu.auth0.com/ \
 	$OIDC_CLIENT_ID \
 	/cfg/secret \
 	/cfg/template
