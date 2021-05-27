@@ -1,14 +1,10 @@
-# kuberos [![Docker Pulls](https://img.shields.io/docker/pulls/negz/kuberos.svg)](https://hub.docker.com/r/negz/kuberos/) [![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/negz/kuberos) [![Travis](https://img.shields.io/travis/negz/kuberos.svg?maxAge=300)](https://travis-ci.org/negz/kuberos/) [![Codecov](https://img.shields.io/codecov/c/github/negz/kuberos.svg?maxAge=3600)](https://codecov.io/gh/negz/kuberos/)
+# kuberos
+
 An OIDC authentication helper for Kubernetes' `kubectl`.
 
 ![The kuberos UI](frontend/kuberos.png)
 
-## Status
-This project is **effectively unmaintained**. I have not used OIDC authentication for some
-time, instead having switched to using [Kubehook](https://github.com/negz/kubehook).
-I will do my best to shepherd pull requests, but cannot guarantee a prompt response
-and do not have bandwidth to address issues or add new features. Please let me know
-via an issue if you'd be interested in taking ownership of Kuberos.
+Forked from: https://github.com/negz/kuberos
 
 ## Purpose
 Kubernetes supports several authentication methods, a popular one of which is OIDC.
@@ -37,32 +33,23 @@ user and context to a cluster, and how to use kubectl.
 ## Usage
 Before using Kuberos you must
 [enable OIDC at the Kubernetes API server](https://kubernetes.io/docs/admin/authentication/#openid-connect-tokens).
-Refer to [this guide](https://cloud.google.com/community/tutorials/kubernetes-auth-openid-rbac)
-for details on how to get an OIDC client ID and secret from Google.
+Refer to [this guide](https://auth0.com/docs/connections/enterprise/oidc)
+for details on how to setup OIDC Provider from Auth0. 
 
-Kuberos is [published](https://hub.docker.com/r/negz/kuberos) to the Docker Hub.
-It must be configured with an OIDC issuer, client ID, and secret, as well as a
-partial `kubeconfig` file. For example:
+Kuberos is [published](https://hub.docker.com/r/ministryofjustice/cloud-platform-kuberos) to the Docker Hub.
+
+To build the docker image locally execute the script
 
 ```bash
-export OIDC_CLIENT_ID=woo
-export OIDC_CLIENT_SECRET=supersecret
-
-echo $OIDC_CLIENT_SECRET >/tmp/cfg/secret
-cat <<EOF >/tmp/cfg/template
-apiVersion: v1
-kind: Config
-current-context: kuberos  # Optional - must be the name of one of the template's clusters.
-clusters:
-- name: kuberos
-  cluster:
-    certificate-authority-data: REDACTED
-    server: https://kuberos.example.org
-EOF
-
-docker run -d -p 10003:10003 -v /tmp/cfg:/cfg "ministryofjustice/cloud-platform-kuberos:latest" \
-  /kuberos https://accounts.google.com $OIDC_CLIENT_ID /cfg/secret /cfg/template
+./scripts/build.sh
 ```
+
+To run kuberos locally, it must be configured with an OIDC issuer, client ID, and secret, as well as a
+partial `kubeconfig` file. 
+- Register your Application with Auth0 and fetch the clientID and ClientSecret
+- Set the callback url to include `http://localhost:10003/ui` 
+- Fetch the ClientID and clientsecret of your application in Auth0 and set the values in the script 
+  `scripts/run.sh` and run the script
 
 Kuberos supports the following arguments:
 ```bash
@@ -129,68 +116,68 @@ Kuberos can be run inside a cluster as long as it can still communicate with
 your OIDC provider from inside the pod and your OIDC provider is set to
 redirect to your Kuberos endpoint (NodePort, LoadBalancer, etc).
 
-The configuration below is meant to serve as a template and **not** something
-that is plug-and-play. You will need to adjust your DNS / nameserver helpers,
-Dex information, and optionally how you ingress your traffic.
+Every cluster of Cloud Platform is registered with Auth0 as part of cluster creation. 
+Update the `charts/values.yaml` for host, oidc details fetched from Auth0 and the cluster values. 
 
-```yaml
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  labels:
-    app: kuberos
-  name: kuberos
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: kuberos
-    spec:
-      # hostAliases are optional, to help route traffic to Dex / OIDC
-      hostAliases:
-      - ip: "192.168.1.1"
-        hostnames:
-        - "dex.oidc.example.com"
-      containers:
-      - image: ministryofjustice/cloud-platform-kuberos:latest
-        name: kuberos
-        command: ["/kuberos", "https://dex.oidc.example.com", "example-app", "/cfg/secret", "/cfg/template"]
-        ports:
-        - name: http
-          containerPort: 10003
-        volumeMounts:
-        - name: config
-          mountPath: /cfg
-      volumes:
-      - name: config
-        configMap:
-          name: kuberos
-          items:
-          - key: template
-            path: template
-          - key: secret
-            path: secret
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: kuberos
-data:
-  template: |
-    apiVersion: v1
-    kind: Config
-    current-context: staging
-    clusters:
-    - name: production
-      cluster:
-        certificate-authority-data: REDACTED
-        server: https://prod.example.org
-    - name: staging
-      cluster:
-        certificate-authority-data: REDACTED
-        server: https://staging.example.org
-  secret: REDACTED
+```bash
+helm install -n kuberos kuberos . -f values.yaml
+```
+## Local development
+### Prerequisites
+* go1.16.3
+
+* npm <version 7>
+
+### Installation
+
+#### Clone the code
+```git clone https://github.com/ministryofjustice/cloud-platform-kuberos.git```
+
+## Structure
+The frontend code, javascript and vue components, are inside the sub folder `src`.
+main.js : The application entrypoint
+kuberos.vue: The root component that creates custom elements, which can be reused in HTML
+webpack.config.js: webpack build config file. This is used to start the app entrypoint and then build a dependency graph 
+of the whole application, pulling those dependencies into one or more bundles that can be included in our application. 
+
+The authentication with OIDC provider and building the kubecfg is written in go. This include
+- `cmd/kuberos`: main package which build the `kuberos` binary
+- `extractor`: an OIDC extractor performs OIDC validation, extracting and storing the information required for Kubernetes authentication along the way.
+- `kuberos.go`: contains handler functions to interact with the frontend when doing login redirects and forms kubecfg file from the template adding the values returned from the URL parameters of the frontend
+
+#### Install, running and testing frontend
+The Frontend can be run with the Node Package manager. All the npm packages are defined in `package.json`
+
+To install the packages do
+```
+$ npm install
+```
+
+To run the app in the development mode,
+```
+npm run dev
+```
+This will run the webpack-dev-server locally on port 8080 and you can visit the page http://localhost:8080/
+
+For the production 
+```
+npm run build
+```
+
+#### Install, running and testing Authentication backend `go` code
+
+To build the kuberos binary run
+
+```bash
+go build -o /kuberos ./cmd/kuberos
+```
+
+You will have to get the dependency modules if not present locally by doing 
+`go get -u github.com/rakyll/statik`
+
+Testing
+```bash
+go test -v
 ```
 
 ## Alternatives

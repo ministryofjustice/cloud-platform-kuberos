@@ -19,11 +19,11 @@ service:
 ingress:
   annotations:
     kubernetes.io/ingress.class: "nginx"
-  host: kuberos.cluster.local
+  host: login.apps.<cp-XXXX>.cloud-platform.service.justice.gov.uk
   tls:
     - secretName: kuberos-tls
       host:
-        - kuberos.cluster.local
+        - login.apps.<cp-XXXX>.cloud-platform.service.justice.gov.uk
 
 resources:
   limits:
@@ -50,6 +50,6 @@ oidc:
 # cluster's CA certificate. Alternativly, you can specify one by passing the
 # base64-encoded apiserver CA certificate.
 cluster:
-  name: kubernetes-cluster
-  address: ""
+  name: "<cp-XXXX>.cloud-platform.service.justice.gov.uk"
+  address: "https://XXXXXXXX.XXX.eu-west-2.eks.amazonaws.com"
   ca: ""
