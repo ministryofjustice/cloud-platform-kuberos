@@ -1,4 +1,4 @@
-name: Build the image on push to any branch
+name: Build the image when a PR is raised/changed
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   main:
-    name: Build image upon push to branch
+    name: Build the image when a PR is raised/changed
     runs-on: ubuntu-latest
     steps:
     -
