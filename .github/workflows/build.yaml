@@ -1,10 +1,9 @@
 name: Build the image on push to any branch
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - "*"
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
 jobs:
   main:
     name: Build image upon push to branch
