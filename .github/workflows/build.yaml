@@ -1,0 +1,27 @@
+name: Build the image on push to any branch
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+jobs:
+  main:
+    name: Build image upon push to branch
+    runs-on: ubuntu-latest
+    steps:
+    -
+        name: checkout
+        uses: actions/checkout@v2
+    -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            ministryofjustice/cloud-platform-kuberos
+    -
+        name: Build kuberos image
+        run: |
+          docker build . 
