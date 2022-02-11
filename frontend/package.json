@@ -18,7 +18,7 @@
     "file-loader": "^6.2.0",
     "highlight.js": ">=10.7.2",
     "jquery": "^3.6.0",
-    "node-sass": "^6.0.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^11.1.0",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
