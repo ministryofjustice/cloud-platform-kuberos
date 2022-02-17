@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div id="kuberos">
     <el-container fluid>
         <el-alert v-if="error" title="Authentication failed" type="error" :description="`${error.response.status} ${error.response.statusText}: ${error.response.data}`" show-icon closable="false"></el-alert>
@@ -158,3 +158,10 @@ export default {
   }
 };
 </script>
+-->
+
+<template>
+  <div class="full-width center-content">
+    <h1>Hello World!</h1>
+  </div>
+</template>
