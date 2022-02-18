@@ -1,6 +1,9 @@
+
 <template>
-  <div id="KuberosOIDC">
-    <el-container fluid>
+  <div class="full-width center-content">
+    <h1>Hello World!</h1>
+    <div id="kuberos">
+       <el-container fluid>
       <el-alert
         v-if="error"
         title="Authentication failed"
@@ -106,15 +109,14 @@ kuberos-4074452424-06m0b                   1/1       Running            1       
             </el-col>
           </el-row>
         </el-card>
-      </el-main>
+        </el-main>
       <el-footer />
     </el-container>
+  </div>
   </div>
 </template>
 
 <script language="JavaScript" type="text/javascript">
-/* eslint-env jquery */
-/* global $ */
 export default {
   name: 'KuberosOIDC',
   metaInfo: {
@@ -200,11 +202,3 @@ export default {
   }
 }
 </script>
-
-<!--
-<template>
-  <div class='full-width center-content'>
-    <h1>Hello World!</h1>
-  </div>
-</template>
--->

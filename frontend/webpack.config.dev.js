@@ -5,7 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  
+  resolve: {
+    extensions: ['.ts', '.js', '.mjs', '.json'],
+  },
   entry: [
     './src/app.js'
   ],  
@@ -43,9 +45,8 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.(js|vue)$/,
-        use: 'eslint-loader',
-        enforce: 'pre'
+        test: /\.mjs$/i,
+        resolve: { byDependency: { esm: { fullySpecified: false } } },
       }
     ]
   }, 
