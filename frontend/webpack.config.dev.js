@@ -12,9 +12,9 @@ module.exports = {
   
   devServer: {
     hot: true,
-    watchOptions: {
-      poll: true
-    }
+    // watchOptions: {
+    //   poll: true
+    // }
   },  
   
   module: {

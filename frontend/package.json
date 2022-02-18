@@ -5,6 +5,7 @@
   "main": "webpack.config.dev.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --ext .js,.vue src --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.dev.js",
     "dev": "webpack-dev-server --config webpack.config.dev.js"
@@ -13,7 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.0",
+    "element-theme-chalk": "^2.15.6",
+    "jquery": "^3.6.0",
     "vue": "^3.2.31",
+    "vue-axios": "^3.4.1",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
