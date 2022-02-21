@@ -1,78 +1,39 @@
-
 <template>
-    <div id="kuberos">
-       <el-container fluid>
-      <el-alert
-        v-if="error"
-        title="Authentication failed"
-        type="error"
-        :description="`${error.response.status} ${error.response.statusText}: ${error.response.data}`"
-        show-icon
-        closable="false"
-      />
-      <el-alert
-        v-else
-        title="Successfully Authenticated"
-        type="success"
-        center
-        show-icon
-      />
+  <div id="kuberos">
+    <el-container fluid>
+        <el-alert v-if="error" title="Authentication failed" type="error" :description="`${error.response.status} ${error.response.statusText}: ${error.response.data}`" show-icon closable="false"></el-alert>
+        <el-alert v-else title="Successfully Authenticated" type="success" center show-icon>
+  </el-alert>
       <el-header>
         <h1>Kuberos</h1>
-        <el-menu
-          :default-active="activeIndex"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-        >
-          <el-menu-item index="1">
-            <a href="#intro">Getting Started</a>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <a href="#kubectl">Running Kubectl</a>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <a href="#manual">Advanced</a>
-          </el-menu-item>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu-item index="1"><a href="#intro">Getting Started</a></el-menu-item>
+          <el-menu-item index="2"><a href="#kubectl">Running Kubectl</a></el-menu-item>
+          <el-menu-item index="3"><a href="#manual">Advanced</a></el-menu-item>
         </el-menu>
       </el-header>
       <el-main>
-        <el-card
-          id="intro"
-          class="box-card"
-        >
-          <el-row :gutter="10">
-            <el-col :xs="24">
-              <h2>Getting Started</h2>
-              <hr class="mb2">
-              <a>Save the file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
-            </el-col>
-          </el-row>
-          <el-row
-            :gutter="10"
-            class="mt2"
-          >
-            <el-col :xs="24">
-              <el-button
-                type="primary"
-                icon="el-icon-download"
-                @click="open"
-              >
-                Download Config File
-              </el-button>
-            </el-col>
-          </el-row>
+        <el-card class="box-card" id="intro">
+        <el-row :gutter="10">
+          <el-col :xs="24">
+            <h2>Getting Started</h2>
+            <hr class="mb2">
+            <a>Save the file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10" class="mt2">
+          <el-col :xs="24">
+           <el-button type="primary" icon="el-icon-download" @click="open">Download Config File</el-button>
+          </el-col>
+        </el-row>
         </el-card>
-        <el-card
-          id="kubectl"
-          class="box-card mt2"
-        >
-          <el-row :gutter="10">
-            <el-col :xs="24">
-              <h2>Running kubectl</h2>
-              <hr class="mb2">
-              <a>Once you've saved the above <code>~/.kube/config</code> file you should be able to run <code>kubectl</code></a>
-              <pre v-highlightjs>
+        <el-card class="box-card mt2" id="kubectl">
+        <el-row :gutter="10">
+          <el-col :xs="24">
+            <h2>Running kubectl</h2>
+            <hr class="mb2">
+           <a>Once you've saved the above <code>~/.kube/config</code> file you should be able to run <code>kubectl</code></a>
+           <pre v-highlightjs>
              <code class="console">
 # These are examples. Your context and cluster names will likely differ.
 
@@ -91,28 +52,25 @@ NAME                                       READY     STATUS             RESTARTS
 kuberos-4074452424-06m0b                   1/1       Running            1          6d
               </code>
             </pre>
-            </el-col>
-          </el-row>
+          </el-col>
+        </el-row>
         </el-card>
-        <el-card
-          id="manual"
-          class="box-card mt2"
-        >
-          <el-row :gutter="10">
-            <el-col :xs="24">
-              <h2>Authenticate Manually</h2>
-              <hr class="mb2">
-              <a>If you want to maintain your existing <code>~/.kube/config</code> file you can run the following to add your user:</a>
-              <pre v-highlightjs="snippetSetCreds()"><code class="bash" /></pre>
-            </el-col>
-          </el-row>
+        <el-card class="box-card mt2" id="manual">
+        <el-row :gutter="10">
+          <el-col :xs="24">
+            <h2>Authenticate Manually</h2>
+            <hr class="mb2">
+           <a>If you want to maintain your existing <code>~/.kube/config</code> file you can run the following to add your user:</a>
+           <pre v-highlightjs="snippetSetCreds()"><code class="bash"></code></pre>
+          </el-col>
+        </el-row>
         </el-card>
-        </el-main>
-      <el-footer />
+      </el-main>
+      <el-footer>
+      </el-footer>
     </el-container>
   </div>
 </template>
-
 <script>
 export default {
   name: "kuberos",

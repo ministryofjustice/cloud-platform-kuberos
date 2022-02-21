@@ -1,5 +1,3 @@
-
-'use strict'
 var path = require('path')
 var webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -42,6 +40,7 @@ module.exports = {
   }, 
   devServer: {
     hot: true,
+    static: __dirname
   },  
   plugins: [
     new webpack.ProvidePlugin({
