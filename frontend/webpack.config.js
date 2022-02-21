@@ -1,66 +1,52 @@
+
 'use strict'
-const webpack = require('webpack')
+var path = require('path')
+var webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const path = require('path')
-
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
 
 module.exports = {
   mode: 'development',
-  resolve: {
-    extensions: ['.ts', '.js', '.mjs', '.json'],
-  },
   entry: [
     './src/app.js'
-  ],  
-  
-  devServer: {
-    hot: true,
-    // watchOptions: {
-    //   poll: true
-    // }
-  },  
-  
+  ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
         use: 'vue-loader'
       },
       {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
-      },
-      {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: ['babel-loader'],
+        exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000
           }
-        ]
+        }]
       },
       {
         test: /\.mjs$/i,
         resolve: { byDependency: { esm: { fullySpecified: false } } },
-      }
+      },
     ]
   }, 
-  
+  devServer: {
+    hot: true,
+  },  
   plugins: [
+    new webpack.ProvidePlugin({
+      '$': 'jquery'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({

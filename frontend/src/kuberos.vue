@@ -1,7 +1,5 @@
 
 <template>
-  <div class="full-width center-content">
-    <h1>Hello World!</h1>
     <div id="kuberos">
        <el-container fluid>
       <el-alert
@@ -112,7 +110,6 @@ kuberos-4074452424-06m0b                   1/1       Running            1       
         </el-main>
       <el-footer />
     </el-container>
-  </div>
   </div>
 </template>
 
