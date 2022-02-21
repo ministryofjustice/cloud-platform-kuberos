@@ -116,67 +116,43 @@ kuberos-4074452424-06m0b                   1/1       Running            1       
   </div>
 </template>
 
-<script language="JavaScript" type="text/javascript">
+<script>
 export default {
-  name: 'KuberosOIDC',
+  name: "kuberos",
   metaInfo: {
-    title: 'Kubernetes Authentication',
+    title: "Kubernetes Authentication",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     }
   },
-  data: function () {
+  data: function() {
     return {
       error: null,
-      activeIndex: '1',
+      activeIndex: "1",
       kubecfg: {}
-    }
-  },
-  created: function () {
-    const q = decodeURI(location.search.substr(1))
-      .replace(/"/g, '\\"')
-      .replace(/&/g, '","')
-      .replace(/=/g, '":"')
-    let query = ''
-    if (q !== '') {
-      query = JSON.parse('{"' + q + '"}')
-    }
-    const url = 'kubecfg?' + $.param(query)
-
-    const _this = this
-    this.axios
-      .get(url)
-      .then(function (response) {
-        _this.kubecfg = response.data
-        if (_this.kubecfg.email === '') {
-          _this.kubecfg.email = 'kuberos'
-        }
-      })
-      .catch(function (error) {
-        _this.error = error
-      })
+    };
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     },
-    open () {
-      window.location.href = this.templateURL()
+    open() {
+      window.location.href = this.templateURL();
       this.$message({
-        message: 'Download started!',
-        type: 'success'
-      })
+        message: "Download started!",
+        type: "success"
+      });
     },
-    templateURL: function () {
-      return 'kubecfg.yaml?' + $.param(this.kubecfg)
+    templateURL: function() {
+      return "kubecfg.yaml?" + $.param(this.kubecfg);
     },
-    snippetSetCreds: function () {
+    snippetSetCreds: function() {
       return (
-        '# Add your user to kubectl\n' +
+        "# Add your user to kubectl\n" +
         'kubectl config set-credentials "' +
         this.kubecfg.email +
         '" \\\n' +
-        '  --auth-provider=oidc \\\n' +
+        "  --auth-provider=oidc \\\n" +
         '  --auth-provider-arg=client-id="' +
         this.kubecfg.clientID +
         '" \\\n' +
@@ -192,13 +168,38 @@ export default {
         '  --auth-provider-arg=idp-issuer-url="' +
         this.kubecfg.issuer +
         '"\n\n' +
-        '# Associate your user with an existing cluster\n' +
-        'export CLUSTER=coolcluster\n' +
-        'export CONTEXT=coolcontext\n' +
+        "# Associate your user with an existing cluster\n" +
+        "export CLUSTER=coolcluster\n" +
+        "export CONTEXT=coolcontext\n" +
+        'kubectl config set-context ${CONTEXT} --cluster ${CLUSTER} --user="' +
         this.kubecfg.email +
         '"'
-      )
+      );
     }
+  },
+  created: function() {
+    var q = decodeURI(location.search.substr(1))
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"');
+    var query = "";
+    if (q != "") {
+      query = JSON.parse('{"' + q + '"}');
+    }
+    var url = "kubecfg?" + $.param(query);
+
+    var _this = this;
+    this.axios
+      .get(url)
+      .then(function(response) {
+        _this.kubecfg = response.data;
+        if (_this.kubecfg.email == "") {
+          _this.kubecfg.email = "kuberos";
+        }
+      })
+      .catch(function(error) {
+        _this.error = error;
+      });
   }
-}
+};
 </script>
