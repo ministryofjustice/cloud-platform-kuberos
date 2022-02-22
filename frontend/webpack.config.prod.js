@@ -2,10 +2,9 @@ var path = require('path')
 var webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: [
     './src/app.js'
   ],
