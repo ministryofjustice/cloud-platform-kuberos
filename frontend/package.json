@@ -1,15 +1,15 @@
 {
-  "name": "frontend",
+  "name": "kuberos",
   "version": "1.0.0",
-  "description": "",
+  "description": "An OIDC authentication helper for Kubernetes' kubectl",
   "main": "webpack.config.js",
+  "author": "platforms@digital.justice.gov.uk",
+  "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode=production --progress",
     "dev": "webpack-dev-server --config webpack.config.js --hot --mode=development"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
     "axios": "^0.26.0",
