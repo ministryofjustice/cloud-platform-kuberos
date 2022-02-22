@@ -1,13 +1,19 @@
 var path = require('path')
 var webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+var mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  mode: 'production',
   entry: [
-    './src/app.js'
+    './src/main.js'
   ],
+  // Path and filename of your result bundle.
+  // Webpack will bundle all JavaScript into this file
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
+  },
   module: {
     rules: [{
         test: /\.vue$/,
@@ -38,19 +44,30 @@ module.exports = {
     ]
   }, 
   devServer: {
-    hot: true,
     static: __dirname
   },  
+  devtool: (mode === 'development') ? 'inline-source-map' : false,
+  mode: mode,
+  performance: {
+    hints: false
+  },
   plugins: [
     new webpack.ProvidePlugin({
       '$': 'jquery'
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    })
   ]
+}
+if (mode === 'production') {
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    }),
+  ])
 }
