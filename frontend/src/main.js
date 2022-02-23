@@ -1,28 +1,24 @@
-import Vue from 'vue';
-import VueAxios from 'vue-axios';
-import axios from 'axios';
-import Meta from 'vue-meta';
-import VueHighlightJS from 'vue-highlightjs';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import 'highlight.js/styles/ocean.css';
-import Kuberos from './kuberos.vue';
+import axios from 'axios'
+
+import { createApp, h } from 'vue'
+import VueAxios from 'vue-axios'
+
+import hljs from 'highlight.js/lib/common';
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+import ElementPlus from 'element-plus'
+import 'element-plus/theme-chalk/index.css'
+import 'highlight.js/styles/github-dark.css'
+import 'highlight.js/lib/common'
+import '../assets/css/app.css'
+import Kuberos from './kuberos.vue'
 
 
-Vue.use(VueAxios, axios)
-Vue.use(Meta);
-Vue.use(VueHighlightJS)
-Vue.use(ElementUI)
-
-
-Vue.config.productionTip = false
-
-
-new Vue({
+const app = createApp({
   el: '#app',
-  render: h => h(Kuberos),
-  template: '<Kuberos/>',
-  components: {
-    Kuberos
-  }
-});
+  render: () => h(Kuberos)
+})
+
+app.use(VueAxios, axios)
+app.use(hljsVuePlugin)
+app.use(ElementPlus)
+app.mount('#app')

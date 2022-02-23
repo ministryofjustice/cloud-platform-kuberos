@@ -33,8 +33,7 @@
             <h2>Running kubectl</h2>
             <hr class="mb2">
            <a>Once you've saved the above <code>~/.kube/config</code> file you should be able to run <code>kubectl</code></a>
-           <pre v-highlightjs>
-             <code class="console">
+           <highlightjs code="
 # These are examples. Your context and cluster names will likely differ.
 
 $ kubectl config get-contexts
@@ -49,9 +48,8 @@ experimental  Active    15d
 
 $ kubectl --context experimental -n experimental get pods
 NAME                                       READY     STATUS             RESTARTS   AGE
-kuberos-4074452424-06m0b                   1/1       Running            1          6d
-              </code>
-            </pre>
+kuberos-4074452424-06m0b                   1/1       Running            1          6d"
+/>
           </el-col>
         </el-row>
         </el-card>
@@ -61,7 +59,7 @@ kuberos-4074452424-06m0b                   1/1       Running            1       
             <h2>Authenticate Manually</h2>
             <hr class="mb2">
            <a>If you want to maintain your existing <code>~/.kube/config</code> file you can run the following to add your user:</a>
-           <pre v-highlightjs="snippetSetCreds()"><code class="bash"></code></pre>
+           <highlightjs autodetect :code="snippetSetCreds()" />
           </el-col>
         </el-row>
         </el-card>
