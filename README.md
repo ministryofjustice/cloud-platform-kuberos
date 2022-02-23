@@ -116,7 +116,10 @@ Kuberos can be run inside a cluster as long as it can still communicate with
 your OIDC provider from inside the pod and your OIDC provider is set to
 redirect to your Kuberos endpoint (NodePort, LoadBalancer, etc).
 
-Every cluster of Cloud Platform is registered with Auth0 as part of cluster creation. 
+Every cluster of Cloud Platform is registered with Auth0 as part of cluster creation.
+
+Deploying the kuberos to the cluster is done via helm  chart. Use [cloud platform helm charts - kuberos](https://github.com/ministryofjustice/cloud-platform-helm-charts/tree/main/kuberos) for deploying.
+
 Update the `charts/values.yaml` for host, oidc details fetched from Auth0 and the cluster values. 
 
 ```bash
@@ -126,7 +129,9 @@ helm install -n kuberos kuberos . -f values.yaml
 ### Prerequisites
 * go1.16.3
 
-* npm <version 7>
+* npm 8
+
+* node: 16.14.0
 
 ### Installation
 
