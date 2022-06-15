@@ -118,7 +118,7 @@ func main() {
 	r.HandlerFunc("GET", "/ui", content(index, filepath.Base(indexPath)))
 	r.HandlerFunc("GET", "/", h.Login)
 	r.HandlerFunc("GET", "/kubecfg", h.KubeCfg)
-	r.HandlerFunc("GET", "/kubecfg.yaml", kuberos.Template(tmpl))
+	r.HandlerFunc("POST", "/kubecfg.yaml", kuberos.Template(tmpl))
 	r.HandlerFunc("GET", "/healthz", ping())
 
 	if *shutdownEndpoint != "" {

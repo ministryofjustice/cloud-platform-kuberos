@@ -23,7 +23,7 @@
         </el-row>
         <el-row :gutter="10" class="mt2">
           <el-col :xs="24">
-           <el-button type="primary" icon="el-icon-download" @click="open">Download Config Template File</el-button>
+           <el-button type="primary" icon="el-icon-download" @click="open">Download Config File</el-button>
           </el-col>
         </el-row>
         </el-card>
@@ -91,16 +91,7 @@ export default {
     },
     open() {
       this.axios
-        .get("kubecfg.yaml", {
-          params: {
-            "email": this.kubecfg.email,
-            "clientID": "XXXX",
-            "clientSecret": "XXXX",
-            "idToken": "XXXX",
-            "refreshToken": "XXXX",
-            "issuer": this.kubecfg.issuer,
-          }
-        })
+        .post("kubecfg.yaml", new URLSearchParams($.param(this.kubecfg)))
         .then(function(response) {
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
