@@ -18,7 +18,7 @@
           <el-col :xs="24">
             <h2>Getting Started</h2>
             <hr class="mb2">
-            <a>Save the template file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
+            <a>Save the file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
           </el-col>
         </el-row>
         <el-row :gutter="10" class="mt2">
@@ -91,7 +91,7 @@ export default {
     },
     open() {
       this.axios
-        .post("kubecfg.yaml", new URLSearchParams($.param(this.kubecfg)))
+        .post("kubecfg.yaml", $.param(this.kubecfg))
         .then(function(response) {
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
