@@ -18,12 +18,12 @@
           <el-col :xs="24">
             <h2>Getting Started</h2>
             <hr class="mb2">
-            <a>Save the file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
+            <a>Save the template file below as  <code>~/.kube/config</code> to enable OIDC based <code>kubectl</code> authentication.</a>
           </el-col>
         </el-row>
         <el-row :gutter="10" class="mt2">
           <el-col :xs="24">
-           <el-button type="primary" icon="el-icon-download" @click="open">Download Config File</el-button>
+           <el-button type="primary" icon="el-icon-download" @click="open">Download Config Template File</el-button>
           </el-col>
         </el-row>
         </el-card>
@@ -90,14 +90,28 @@ export default {
       console.log(key, keyPath);
     },
     open() {
-      window.location.href = this.templateURL();
-      this.$message({
-        message: "Download started!",
-        type: "success"
-      });
-    },
-    templateURL: function() {
-      return "kubecfg.yaml?" + $.param(this.kubecfg);
+      this.axios
+        .get("kubecfg.yaml", {
+          params: {
+            "email": this.kubecfg.email,
+            "clientID": "XXXX",
+            "clientSecret": "XXXX",
+            "idToken": "XXXX",
+            "refreshToken": "XXXX",
+            "issuer": this.kubecfg.issuer,
+          }
+        })
+        .then(function(response) {
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', "kubecfg.yaml")
+            document.body.appendChild(link)
+            link.click()
+          })
+        .catch(function (error) {
+          console.log('Error', error.message);
+        });
     },
     snippetSetCreds: function() {
       return (
