@@ -90,14 +90,19 @@ export default {
       console.log(key, keyPath);
     },
     open() {
-      window.location.href = this.templateURL();
-      this.$message({
-        message: "Download started!",
-        type: "success"
-      });
-    },
-    templateURL: function() {
-      return "kubecfg.yaml?" + $.param(this.kubecfg);
+      this.axios
+        .post("kubecfg.yaml", $.param(this.kubecfg))
+        .then(function(response) {
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', "kubecfg.yaml")
+            document.body.appendChild(link)
+            link.click()
+          })
+        .catch(function (error) {
+          console.log('Error', error.message);
+        });
     },
     snippetSetCreds: function() {
       return (
