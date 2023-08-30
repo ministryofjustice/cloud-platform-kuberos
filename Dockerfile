@@ -1,4 +1,4 @@
-FROM node:16-alpine as node
+FROM node:20-alpine as node
 ADD frontend/ .
 RUN npm install && npm run build
 
