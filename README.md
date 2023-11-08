@@ -177,8 +177,6 @@ To build the kuberos binary run
 go build -o /kuberos ./cmd/kuberos
 ```
 
-You will have to get the dependency modules if not present locally by doing 
-`go get -u github.com/rakyll/statik`
 
 Testing
 ```bash

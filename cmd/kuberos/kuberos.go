@@ -16,8 +16,6 @@ import (
 	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 	"github.com/rakyll/statik/fs"
 
-	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
-
 	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
@@ -109,7 +107,6 @@ func main() {
 	}()
 
 	frontend, err := fs.New()
-	kingpin.FatalIfError(err, "cannot load frontend")
 
 	index, err := frontend.Open(indexPath)
 	kingpin.FatalIfError(err, "cannot open frontend index %s", indexPath)
