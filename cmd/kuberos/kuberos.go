@@ -14,6 +14,7 @@ import (
 
 	kuberos "github.com/ministryofjustice/cloud-platform-kuberos"
 	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
+	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
 	"github.com/rakyll/statik/fs"
 
 	oidc "github.com/coreos/go-oidc/v3/oidc"
@@ -107,6 +108,7 @@ func main() {
 	}()
 
 	frontend, err := fs.New()
+	kingpin.FatalIfError(err, "cannot load frontend")
 
 	index, err := frontend.Open(indexPath)
 	kingpin.FatalIfError(err, "cannot open frontend index %s", indexPath)
