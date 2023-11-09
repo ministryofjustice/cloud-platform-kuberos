@@ -12,10 +12,11 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/rakyll/statik/fs"
+
 	kuberos "github.com/ministryofjustice/cloud-platform-kuberos"
 	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
-	"github.com/rakyll/statik/fs"
 
 	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"
@@ -106,6 +107,11 @@ func main() {
 		<-sigterm
 		shutdown()
 	}()
+
+	//to embed a directory of static files into your Go binary to be later served from an http.FileSystem
+
+	// app := fiber.New()
+	// app.Static("/dist", "./dist", fibre.Static)
 
 	frontend, err := fs.New()
 	kingpin.FatalIfError(err, "cannot load frontend")
