@@ -20,7 +20,6 @@ import (
 
 	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/julienschmidt/httprouter"
-
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
@@ -108,13 +107,6 @@ func main() {
 		<-sigterm
 		shutdown()
 	}()
-
-	// //go:embed dist
-	// var efs embed.FS
-	//to embed a directory of static files into your Go binary to be later served from an http.FileSystem
-
-	//index, err := efs.ReadFile("index.html")
-	//kingpin.FatalIfError(err, "cannot open frontend index %s", indexPath)
 
 	frontend, err := fs.New()
 	kingpin.FatalIfError(err, "cannot load frontend")
