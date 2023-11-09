@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -14,12 +15,12 @@ import (
 
 	"github.com/rakyll/statik/fs"
 
+	oidc "github.com/coreos/go-oidc/v3/oidc"
+	"github.com/julienschmidt/httprouter"
 	kuberos "github.com/ministryofjustice/cloud-platform-kuberos"
 	"github.com/ministryofjustice/cloud-platform-kuberos/extractor"
 	_ "github.com/ministryofjustice/cloud-platform-kuberos/statik"
 
-	oidc "github.com/coreos/go-oidc/v3/oidc"
-	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
@@ -108,10 +109,12 @@ func main() {
 		shutdown()
 	}()
 
+	// //go:embed dist
+	// var efs embed.FS
 	//to embed a directory of static files into your Go binary to be later served from an http.FileSystem
 
-	// app := fiber.New()
-	// app.Static("/dist", "./dist", fibre.Static)
+	//index, err := efs.ReadFile("index.html")
+	//kingpin.FatalIfError(err, "cannot open frontend index %s", indexPath)
 
 	frontend, err := fs.New()
 	kingpin.FatalIfError(err, "cannot load frontend")
