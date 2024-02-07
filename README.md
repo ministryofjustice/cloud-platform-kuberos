@@ -127,11 +127,11 @@ helm install -n kuberos kuberos . -f values.yaml
 ```
 ## Local development
 ### Prerequisites
-* go1.16.3
+* go1.21
 
 * npm 8
 
-* node: 16.14.0
+* node: 21.0.0
 
 ### Installation
 
