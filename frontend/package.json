@@ -12,7 +12,7 @@
   "keywords": [],
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
-    "axios": "^0.26.0",
+    "axios": "^1.6.0",
     "element-plus": "^2.0.2",
     "element-theme-chalk": "^2.15.6",
     "vue": "^3.2.31",
