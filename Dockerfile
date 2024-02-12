@@ -2,7 +2,7 @@ FROM node:21-alpine as node
 ADD frontend/ .
 RUN npm install && npm run build
 
-FROM golang:1.21-alpine as golang
+FROM golang:1.22-alpine as golang
 RUN apk --no-cache add git
 WORKDIR /go/src/github.com/ministryofjustice/cloud-platform-kuberos/
 ENV CGO_ENABLED=0
