@@ -11,11 +11,11 @@ jobs:
     steps:
     -
         name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     -
         name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
         with:
           # list of Docker images to use as base name for tags
           images: |
@@ -23,4 +23,4 @@ jobs:
     -
         name: Build kuberos image
         run: |
-          docker build . 
+          docker build .
