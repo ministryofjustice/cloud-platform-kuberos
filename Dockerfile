@@ -16,7 +16,7 @@ RUN go install github.com/rakyll/statik
 RUN cd statik && go generate && cd ..
 RUN go build -o /kuberos ./cmd/kuberos
 
-FROM alpine:3.20
+FROM alpine:3.21
 MAINTAINER Nic Cope <n+docker@rk0n.org>
 
 RUN apk --no-cache add ca-certificates curl
