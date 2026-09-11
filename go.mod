@@ -1,8 +1,6 @@
 module github.com/ministryofjustice/cloud-platform-kuberos
 
-go 1.22.0
-
-toolchain go1.22.3
+go 1.23.0
 
 require (
 	github.com/coreos/go-oidc/v3 v3.10.0
@@ -13,7 +11,7 @@ require (
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/afero v1.11.0
 	go.uber.org/zap v1.27.0
-	golang.org/x/oauth2 v0.21.0
+	golang.org/x/oauth2 v0.27.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.30.1
 	k8s.io/client-go v0.30.1
