@@ -7,7 +7,7 @@ toolchain go1.22.3
 require (
 	github.com/coreos/go-oidc/v3 v3.10.0
 	github.com/go-test/deep v1.1.0
-	github.com/gorilla/schema v1.3.0
+	github.com/gorilla/schema v1.4.1
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/rakyll/statik v0.1.7
