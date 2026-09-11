@@ -13,7 +13,7 @@
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
     "axios": "^1.6.0",
-    "element-plus": "^2.0.2",
+    "element-plus": "^2.10.2",
     "element-theme-chalk": "^2.15.6",
     "vue": "^3.2.31",
     "vue-axios": "^3.4.1"
