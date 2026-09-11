@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "@highlightjs/vue-plugin": "^2.1.0",
+    "@highlightjs/vue-plugin": "^2.1.1",
     "axios": "^1.6.0",
     "element-plus": "^2.0.2",
     "element-theme-chalk": "^2.15.6",
